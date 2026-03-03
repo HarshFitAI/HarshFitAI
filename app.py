@@ -6,13 +6,17 @@ st.set_page_config(page_title="HarshFit AI", layout="wide")
 # =========================
 # LOAD DATABASE
 # =========================
-with open("database/exercises.json") as f:
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+with open(os.path.join(BASE_DIR, "database", "exercises.json")) as f:
     exercises = json.load(f)
 
-with open("database/yoga.json") as f:
+with open(os.path.join(BASE_DIR, "database", "yoga.json")) as f:
     yoga_data = json.load(f)
 
-with open("database/meals.json") as f:
+with open(os.path.join(BASE_DIR, "database", "meals.json")) as f:
     meals = json.load(f)
 
 # =========================
