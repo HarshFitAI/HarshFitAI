@@ -61,6 +61,25 @@ height = st.sidebar.number_input(
     max_value=220,
     value=170
 )
+weight = st.sidebar.number_input("Your Weight (kg)", min_value=30, max_value=200, value=75)
+
+age = st.sidebar.number_input("Your Age", min_value=10, max_value=80, value=25)
+
+gender = st.sidebar.selectbox("Gender", ["Male", "Female"])
+# BMI Calculation
+bmi = weight / ((height / 100) ** 2)
+
+# BMR Calculation (Mifflin-St Jeor Formula)
+if gender == "Male":
+    bmr = 10 * weight + 6.25 * height - 5 * age + 5
+else:
+    bmr = 10 * weight + 6.25 * height - 5 * age - 161
+
+# Estimated Maintenance Calories
+maintenance_calories = bmr * 1.4  # moderate activity
+
+# Fat loss calories (500 deficit)
+fat_loss_calories = maintenance_calories - 500
 
 # -------------------------
 # Generate Plan
@@ -68,6 +87,13 @@ height = st.sidebar.number_input(
 if st.button("Generate Plan"):
 
     st.subheader(f"📅 Workout Plan for {week_day}")
+st.markdown("### 📊 Body Analysis")
+st.write(f"**BMI:** {bmi:.2f}")
+st.write(f"**Maintenance Calories:** {maintenance_calories:.0f} kcal")
+st.write(f"**Fat Loss Calories:** {fat_loss_calories:.0f} kcal")
+
+water_intake = weight * 0.035
+st.write(f"**Recommended Water Intake:** {water_intake:.2f} Liters/day")
 
     # -------------------------
     # Exercise Section
