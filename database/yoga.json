@@ -1,0 +1,12 @@
+[
+  {"name":"Surya Namaskar","focus":"Full Body","difficulty":"Beginner","duration":"5 rounds","benefits":"Boosts metabolism and flexibility","video_url":"https://www.youtube.com/results?search_query=Surya+Namaskar"},
+  {"name":"Bhujangasana","focus":"Back","difficulty":"Beginner","duration":"30 sec","benefits":"Strengthens lower back","video_url":"https://www.youtube.com/results?search_query=Bhujangasana"},
+  {"name":"Naukasana","focus":"Core","difficulty":"Intermediate","duration":"30 sec","benefits":"Reduces belly fat","video_url":"https://www.youtube.com/results?search_query=Naukasana"},
+  {"name":"Utkatasana","focus":"Legs","difficulty":"Intermediate","duration":"30 sec","benefits":"Strengthens thighs","video_url":"https://www.youtube.com/results?search_query=Utkatasana"},
+  {"name":"Virabhadrasana","focus":"Legs","difficulty":"Beginner","duration":"30 sec","benefits":"Improves balance and stamina","video_url":"https://www.youtube.com/results?search_query=Virabhadrasana"},
+  {"name":"Dhanurasana","focus":"Back","difficulty":"Advanced","duration":"30 sec","benefits":"Improves spinal flexibility","video_url":"https://www.youtube.com/results?search_query=Dhanurasana"},
+  {"name":"Trikonasana","focus":"Full Body","difficulty":"Beginner","duration":"30 sec","benefits":"Improves digestion and flexibility","video_url":"https://www.youtube.com/results?search_query=Trikonasana"},
+  {"name":"Setu Bandhasana","focus":"Back","difficulty":"Intermediate","duration":"30 sec","benefits":"Strengthens back and glutes","video_url":"https://www.youtube.com/results?search_query=Setu+Bandhasana"},
+  {"name":"Adho Mukha Svanasana","focus":"Full Body","difficulty":"Beginner","duration":"30 sec","benefits":"Improves circulation","video_url":"https://www.youtube.com/results?search_query=Adho+Mukha+Svanasana"},
+  {"name":"Kapalbhati","focus":"Core","difficulty":"Beginner","duration":"2 minutes","benefits":"Boosts fat metabolism","video_url":"https://www.youtube.com/results?search_query=Kapalbhati"}
+]

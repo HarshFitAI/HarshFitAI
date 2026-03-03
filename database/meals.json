@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Oats with Banana",
+    "type": "Vegetarian",
+    "calories": 350,
+    "protein": 12,
+    "carbs": 55,
+    "fats": 8,
+    "quantity": "80g oats + 1 banana"
+  },
+  {
+    "name": "Grilled Chicken Breast",
+    "type": "Non-Vegetarian",
+    "calories": 300,
+    "protein": 45,
+    "carbs": 0,
+    "fats": 5,
+    "quantity": "150g chicken"
+  },
+  {
+    "name": "Paneer Bhurji",
+    "type": "Vegetarian",
+    "calories": 400,
+    "protein": 25,
+    "carbs": 10,
+    "fats": 30,
+    "quantity": "150g paneer"
+  },
+  {
+    "name": "Brown Rice + Dal",
+    "type": "Vegetarian",
+    "calories": 450,
+    "protein": 15,
+    "carbs": 70,
+    "fats": 5,
+    "quantity": "150g rice + 1 bowl dal"
+  },
+  {
+    "name": "Boiled Eggs",
+    "type": "Non-Vegetarian",
+    "calories": 160,
+    "protein": 12,
+    "carbs": 1,
+    "fats": 11,
+    "quantity": "2 eggs"
+  }
+]
