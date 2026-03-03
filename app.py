@@ -1,132 +1,157 @@
 import streamlit as st
 import json
 
-st.set_page_config(page_title="HarshFit AI", layout="wide")
-
-# =========================
-# LOAD DATABASE
-# =========================
-import os
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-with open(os.path.join(BASE_DIR, "database", "exercises.json")) as f:
-    exercises = json.load(f)
-
-with open(os.path.join(BASE_DIR, "database", "yoga.json")) as f:
-    yoga_data = json.load(f)
-
-with open(os.path.join(BASE_DIR, "database", "meals.json")) as f:
-    meals = json.load(f)
-
-# =========================
-# SIDEBAR INPUTS
-# =========================
-st.sidebar.title("User Settings")
-
-muscle = st.sidebar.selectbox("Select Muscle Group", list(exercises.keys()))
-goal = st.sidebar.selectbox("Select Goal", ["Fat Loss", "Muscle Gain"])
-difficulty = st.sidebar.selectbox("Select Difficulty", ["Beginner", "Intermediate", "Advanced"])
-yoga_level = st.sidebar.selectbox("Yoga Difficulty", ["Beginner", "Intermediate", "Advanced"])
-day = st.sidebar.selectbox("Workout Day", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"])
-
-calorie_target = st.sidebar.number_input("Daily Calorie Target", value=2000)
-diet_pref = st.sidebar.selectbox("Diet Preference", ["Vegetarian", "Non-Vegetarian"])
-
-height = st.sidebar.number_input("Your Height (cm)", min_value=120, max_value=220, value=170)
-weight = st.sidebar.number_input("Your Weight (kg)", min_value=30, max_value=200, value=75)
-age = st.sidebar.number_input("Your Age", min_value=10, max_value=80, value=25)
-gender = st.sidebar.selectbox("Gender", ["Male", "Female"])
-
-# =========================
-# BODY CALCULATIONS
-# =========================
-
-bmi = weight / ((height / 100) ** 2)
-
-if gender == "Male":
-    bmr = 10 * weight + 6.25 * height - 5 * age + 5
-else:
-    bmr = 10 * weight + 6.25 * height - 5 * age - 161
-
-maintenance_calories = bmr * 1.4
-fat_loss_calories = maintenance_calories - 500
-water_intake = weight * 0.035
-
-# =========================
-# MAIN PAGE
-# =========================
+st.set_page_config(page_title="HarshFit AI", page_icon="💪", layout="wide")
 
 st.title("💪 HarshFit AI – Professional Fitness System")
 
-generate = st.button("Generate Plan")
+# =============================
+# LOAD DATABASES
+# =============================
 
-if generate:
+with open("database/exercises.json", "r") as f:
+    exercises = json.load(f)
 
-    # ===== BODY ANALYSIS =====
-    st.markdown("## 📊 Body Analysis")
-    st.write(f"**BMI:** {bmi:.2f}")
+with open("database/meals.json", "r") as f:
+    meals = json.load(f)
 
-    if bmi < 18.5:
-        st.write("Category: Underweight")
-    elif bmi < 25:
-        st.write("Category: Normal Weight")
-    elif bmi < 30:
-        st.write("Category: Overweight")
+# =============================
+# SIDEBAR SETTINGS
+# =============================
+
+st.sidebar.header("User Settings")
+
+# Unique filter options
+muscle_options = sorted(set(item["muscle_group"] for item in exercises))
+goal_options = sorted(set(item["goal"] for item in exercises))
+difficulty_options = sorted(set(item["difficulty"] for item in exercises))
+
+muscle = st.sidebar.selectbox("Select Muscle Group", muscle_options)
+goal = st.sidebar.selectbox("Select Goal", goal_options)
+difficulty = st.sidebar.selectbox("Select Difficulty", difficulty_options)
+
+height = st.sidebar.number_input("Your Height (cm)", 100, 250, 170)
+weight = st.sidebar.number_input("Your Weight (kg)", 30, 200, 70)
+age = st.sidebar.number_input("Your Age", 10, 100, 21)
+
+calorie_target = st.sidebar.number_input(
+    "Daily Calorie Target (kcal)", 1000, 5000, 2000
+)
+
+diet_type = st.sidebar.selectbox(
+    "Diet Preference", ["Vegetarian", "Non-Vegetarian"]
+)
+
+# =============================
+# BMI + WATER
+# =============================
+
+bmi = weight / ((height / 100) ** 2)
+
+st.sidebar.markdown("### 📊 Your BMI")
+st.sidebar.write(round(bmi, 2))
+
+if bmi < 18.5:
+    st.sidebar.info("Underweight")
+elif 18.5 <= bmi < 25:
+    st.sidebar.success("Normal Weight")
+elif 25 <= bmi < 30:
+    st.sidebar.warning("Overweight")
+else:
+    st.sidebar.error("Obese")
+
+# Water recommendation
+water_liters = round(weight * 0.035, 2)
+st.sidebar.markdown("### 💧 Daily Water Intake")
+st.sidebar.write(f"{water_liters} Liters per day")
+
+# =============================
+# GENERATE PLAN BUTTON
+# =============================
+
+if st.button("Generate Plan"):
+
+    # =============================
+    # EXERCISE SECTION
+    # =============================
+
+    st.subheader("🏋 Personalized Exercise Plan")
+
+    filtered_exercises = [
+        ex for ex in exercises
+        if ex["muscle_group"] == muscle
+        and ex["goal"] == goal
+        and ex["difficulty"] == difficulty
+    ]
+
+    if filtered_exercises:
+        total_calories = 0
+
+        for ex in filtered_exercises:
+            st.markdown(f"### {ex['name']}")
+            st.write(f"Sets: {ex['sets']}")
+            st.write(f"Reps: {ex['reps']}")
+            st.write(f"Calories (10 min): {ex['calories_per_10min']} kcal")
+            st.markdown(f"[🎥 Watch Video]({ex['video_url']})")
+            st.markdown("---")
+
+            total_calories += ex["calories_per_10min"]
+
+        st.success(f"🔥 Estimated Calories Burn: {total_calories} kcal (10 min)")
+
     else:
-        st.write("Category: Obese")
+        st.warning("No exercises found for selected filters.")
 
-    st.write(f"**Maintenance Calories:** {maintenance_calories:.0f} kcal")
-    st.write(f"**Fat Loss Calories:** {fat_loss_calories:.0f} kcal")
-    st.write(f"**Recommended Water Intake:** {water_intake:.2f} Liters/day")
+         # =============================
+    # PROFESSIONAL MEAL PLAN
+    # =============================
 
-    st.divider()
+    st.subheader("🍽 Personalized Meal Plan")
 
-    # ===== EXERCISE PLAN =====
-    st.subheader("🏋 Exercise Plan")
+    # Filter by diet
+    filtered_meals = [
+        meal for meal in meals
+        if meal["type"] == diet_type
+    ]
 
-    for ex in exercises[muscle][difficulty]:
-        st.markdown(f"""
-        ### {ex['name']}
-        - Sets: {ex['sets']}
-        - Reps: {ex['reps']}
-        - Rest: {ex['rest']}
-        - Calories Burn (10 min): {ex['calories']}
-        """)
+    if filtered_meals:
 
-    st.divider()
+        breakfast_target = calorie_target * 0.3
+        lunch_target = calorie_target * 0.4
+        dinner_target = calorie_target * 0.3
 
-    # ===== YOGA PLAN =====
-    st.subheader("🧘 Yoga Plan")
+        breakfast = [m for m in filtered_meals if m["meal_time"] == "Breakfast"]
+        lunch = [m for m in filtered_meals if m["meal_time"] == "Lunch"]
+        dinner = [m for m in filtered_meals if m["meal_time"] == "Dinner"]
 
-    yoga_found = False
+        def display_meal(title, meal_list, target):
+            st.markdown(f"### {title}")
+            total = 0
+            protein = 0
+            carbs = 0
+            fats = 0
 
-    for y in yoga_data:
-        if y["level"] == yoga_level:
-            yoga_found = True
-            st.markdown(f"""
-            ### {y['name']}
-            - Duration: {y['duration']}
-            - Benefit: {y['benefit']}
-            """)
+            for m in meal_list:
+                if total < target:
+                    st.write(f"**{m['name']}**")
+                    st.write(f"Calories: {m['calories']} kcal")
+                    st.write(f"Protein: {m['protein']} g")
+                    st.write(f"Carbs: {m['carbs']} g")
+                    st.write(f"Fats: {m['fats']} g")
+                    st.write(f"Quantity: {m['quantity']}")
+                    st.markdown("---")
 
-    if not yoga_found:
-        st.info("No yoga found for selected level.")
+                    total += m["calories"]
+                    protein += m["protein"]
+                    carbs += m["carbs"]
+                    fats += m["fats"]
 
-    st.divider()
+            st.info(f"Target: {int(target)} kcal | Selected: {total} kcal")
+            st.success(f"Protein: {protein}g | Carbs: {carbs}g | Fats: {fats}g")
 
-    # ===== MEAL PLAN =====
-    st.subheader("🥗 Daily Meal Plan")
+        display_meal("🥣 Breakfast", breakfast, breakfast_target)
+        display_meal("🍛 Lunch", lunch, lunch_target)
+        display_meal("🍲 Dinner", dinner, dinner_target)
 
-    total = 0
-
-    for meal in meals:
-        if meal["type"] == diet_pref:
-            st.markdown(f"""
-            ### {meal['name']}
-            - Quantity: {meal['quantity']}
-            - Calories: {meal['calories']} kcal
-            """)
-            total += meal["calories"]
-
-    st.write(f"### 🔥 Total Planned Calories: {total} kcal")
+    else:
+        st.warning("No meals found for selected diet.")

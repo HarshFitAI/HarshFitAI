@@ -1,6 +1,7 @@
 [
   {
     "name": "Oats with Banana",
+    "meal_time": "Breakfast",
     "type": "Vegetarian",
     "calories": 350,
     "protein": 12,
@@ -9,25 +10,28 @@
     "quantity": "80g oats + 1 banana"
   },
   {
-    "name": "Grilled Chicken Breast",
-    "type": "Non-Vegetarian",
-    "calories": 300,
-    "protein": 45,
-    "carbs": 0,
-    "fats": 5,
-    "quantity": "150g chicken"
-  },
-  {
-    "name": "Paneer Bhurji",
+    "name": "Paneer Paratha + Curd",
+    "meal_time": "Breakfast",
     "type": "Vegetarian",
     "calories": 400,
-    "protein": 25,
-    "carbs": 10,
-    "fats": 30,
-    "quantity": "150g paneer"
+    "protein": 18,
+    "carbs": 50,
+    "fats": 15,
+    "quantity": "2 paratha + 100g curd"
+  },
+  {
+    "name": "Boiled Eggs + Brown Bread",
+    "meal_time": "Breakfast",
+    "type": "Non-Vegetarian",
+    "calories": 300,
+    "protein": 20,
+    "carbs": 25,
+    "fats": 15,
+    "quantity": "2 eggs + 2 slices bread"
   },
   {
     "name": "Brown Rice + Dal",
+    "meal_time": "Lunch",
     "type": "Vegetarian",
     "calories": 450,
     "protein": 15,
@@ -36,12 +40,53 @@
     "quantity": "150g rice + 1 bowl dal"
   },
   {
-    "name": "Boiled Eggs",
+    "name": "Paneer Bhurji + Roti",
+    "meal_time": "Lunch",
+    "type": "Vegetarian",
+    "calories": 500,
+    "protein": 25,
+    "carbs": 40,
+    "fats": 30,
+    "quantity": "150g paneer + 2 roti"
+  },
+  {
+    "name": "Grilled Chicken + Rice",
+    "meal_time": "Lunch",
     "type": "Non-Vegetarian",
-    "calories": 160,
-    "protein": 12,
-    "carbs": 1,
-    "fats": 11,
-    "quantity": "2 eggs"
+    "calories": 550,
+    "protein": 45,
+    "carbs": 50,
+    "fats": 10,
+    "quantity": "150g chicken + 150g rice"
+  },
+  {
+    "name": "Vegetable Soup + Salad",
+    "meal_time": "Dinner",
+    "type": "Vegetarian",
+    "calories": 300,
+    "protein": 10,
+    "carbs": 35,
+    "fats": 8,
+    "quantity": "1 bowl soup + 1 plate salad"
+  },
+  {
+    "name": "Khichdi + Curd",
+    "meal_time": "Dinner",
+    "type": "Vegetarian",
+    "calories": 400,
+    "protein": 14,
+    "carbs": 60,
+    "fats": 10,
+    "quantity": "1 bowl khichdi + 100g curd"
+  },
+  {
+    "name": "Grilled Fish + Veggies",
+    "meal_time": "Dinner",
+    "type": "Non-Vegetarian",
+    "calories": 450,
+    "protein": 40,
+    "carbs": 10,
+    "fats": 20,
+    "quantity": "150g fish + sautéed vegetables"
   }
 ]
